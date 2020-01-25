@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
 
 public class Online extends ListenerAdapter {
+
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
         if (event.getMessage().getContentDisplay().equalsIgnoreCase(Info.PREFIX + "online")) {
@@ -23,15 +24,28 @@ public class Online extends ListenerAdapter {
             StringBuilder sb = new StringBuilder("Здесь ");
             sb.append(online);
             int members = event.getGuild().getMembers().size();
+//            Склонение online пользователей
             switch (plurality(online)) {
                 default:
-                    sb.append(" online пользователей. Всего на канале ").append(members).append(" пользователей.");
+                    sb.append(" online пользователей. Всего на канале ").append(members);
                     break;
                 case 1:
-                    sb.append(" online пользователь. Всего на канале ").append(members).append(" пользователь.");
+                    sb.append(" online пользователь. Всего на канале ").append(members);
                     break;
                 case 2:
-                    sb.append(" online пользователя. Всего на канале ").append(members).append(" пользователя.");
+                    sb.append(" online пользователя. Всего на канале ").append(members);
+                    break;
+            }
+//            Склонение общего числа пользователей
+            switch (plurality(members)) {
+                default:
+                    sb.append(" пользователей.");
+                    break;
+                case 1:
+                    sb.append(" пользователь");
+                    break;
+                case 2:
+                    sb.append(" пользователя.");
                     break;
             }
 //            Отправка сообщения
