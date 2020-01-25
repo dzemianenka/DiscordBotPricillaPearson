@@ -11,7 +11,7 @@ public class EDDB extends ListenerAdapter {
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
         if (event.getMessage().getContentDisplay().equalsIgnoreCase(Info.PREFIX + "eddb")) {
-            event.getChannel().sendMessage("http://eddb.io").queue();
+            event.getChannel().sendMessage("<http://eddb.io>").queue();
         }
     }
 }

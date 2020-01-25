@@ -10,7 +10,7 @@ public class Inara extends ListenerAdapter {
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
         if (event.getMessage().getContentDisplay().equalsIgnoreCase(Info.PREFIX + "inara")) {
-            event.getChannel().sendMessage("http://inara.cz").queue();
+            event.getChannel().sendMessage("<http://inara.cz>").queue();
         }
     }
 }

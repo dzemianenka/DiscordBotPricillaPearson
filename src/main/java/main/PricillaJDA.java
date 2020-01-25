@@ -19,6 +19,7 @@ public class PricillaJDA extends ListenerAdapter {
         jda.addEventListeners(new Coriolis());
         jda.addEventListeners(new EDDB());
         jda.addEventListeners(new Inara());
+
         jda.setToken(TOKEN).build();
 
     }
