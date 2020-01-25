@@ -10,7 +10,7 @@ public class Forum extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
-        if (event.getMessage().getContentDisplay().equals(Info.PREFIX + "forum")) {
+        if (event.getMessage().getContentDisplay().equalsIgnoreCase(Info.PREFIX + "forum")) {
             event.getChannel().sendMessage("http://rci.mybb.ru").queue();
         }
     }
