@@ -13,8 +13,11 @@ public class Help extends ListenerAdapter {
         if (event.getMessage().getContentDisplay().equalsIgnoreCase(Info.PREFIX + "help")) {
             event.getChannel().sendMessage("Приветствую Вас, Я - спикер фракции Nagii Union\n" +
                     "Ниже привожу список доступных команд:\n" +
-                    "**!forum** - предоставление адреса форума\n" +
-                    "**!online** - информация о активности discord канала").queue();
+                    "**!coriolis** - Elite: Dangerous Shipyard\n" +
+                    "**!eddb** - Elite: Dangerous Database\n" +
+                    "**!forum** - форум ICU\n" +
+                    "**!inara** - Elite: Dangerous companion\n" +
+                    "**!online** - информация о активности discord канала\n").queue();
         }
     }
 }
