@@ -1,6 +1,7 @@
 package main;
 
 import events.Forum;
+import events.Online;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -14,6 +15,8 @@ public class PricillaJDA extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder jda = new JDABuilder(AccountType.BOT);
         jda.addEventListeners(new Forum());
+        jda.addEventListeners(new Online());
         jda.setToken(TOKEN).build();
+
     }
 }
