@@ -13,8 +13,8 @@ public class Help extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] command = event.getMessage().getContentRaw().split(" ");
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "help")
-                || command[0].equalsIgnoreCase(Info.PREFIX + "info")) {
+        if (command[0].equalsIgnoreCase(Info.PREFIX + "help") ||
+                command[0].equalsIgnoreCase(Info.PREFIX + "info")) {
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Приветствую Вас,\n" +
                     " Я - спикер фракции Nagii Union");
