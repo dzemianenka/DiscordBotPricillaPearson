@@ -62,6 +62,7 @@ public class Online extends ListenerAdapter {
             embed.clear();
         }
     }
+
     //    Склонение сущиствительных с числительными
     private static int plurality(int n) {
         n = n % 100;

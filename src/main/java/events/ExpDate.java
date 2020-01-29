@@ -73,6 +73,7 @@ public class ExpDate extends ListenerAdapter {
             }
         }
     }
+
     //    Соединение с БД
     private Connection getConnectionBD() {
         Connection con = null;
