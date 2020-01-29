@@ -18,12 +18,10 @@ public class PricillaJDA {
         jda = new JDABuilder(AccountType.BOT).setToken(TOKEN).build();
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
         jda.getPresence().setActivity(Activity.playing("Elite Dangerous"));
-        jda.addEventListener(new Forum());
+        jda.addEventListener(new Links());
         jda.addEventListener(new Online());
         jda.addEventListener(new Help());
-        jda.addEventListener(new Coriolis());
-        jda.addEventListener(new EDDB());
-        jda.addEventListener(new Inara());
+        jda.addEventListener(new ExpDate());
 
 
 

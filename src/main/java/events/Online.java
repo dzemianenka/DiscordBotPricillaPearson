@@ -23,7 +23,7 @@ public class Online extends ListenerAdapter {
                     online++;
                 }
             }
-//            Текст сообщения
+//            Создание строки сообщения
             StringBuilder sb = new StringBuilder("Здесь ");
             sb.append(online);
             int members = event.getGuild().getMembers().size();
@@ -51,18 +51,17 @@ public class Online extends ListenerAdapter {
                     sb.append(" пользователя.");
                     break;
             }
-//            Отправка сообщения
+//            Текст сообщения в чат. Online
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Информация участников Discord канала:");
             embed.setDescription(sb.toString());
             embed.setColor(0xf56111);
-
+//            Отправка сообщения
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
         }
     }
-
     //    Склонение сущиствительных с числительными
     private static int plurality(int n) {
         n = n % 100;
