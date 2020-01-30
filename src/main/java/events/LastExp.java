@@ -9,31 +9,29 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
 import java.sql.*;
 
-public class SysCount extends ListenerAdapter {
+public class LastExp extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] command = event.getMessage().getContentRaw().split(" ");
-        int count = 0;
+        String sys = "";
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "syscount")) {
+        if (command[0].equalsIgnoreCase(Info.PREFIX + "lastexp")) {
 //            Строка запроса в БД
-            String syscount = "SELECT COUNT(nagiisys.systems) FROM nagiisys";
+            String lastExp = "SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1";
             try {
                 Connection con = new Helper().getConnectionBD();
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery(syscount);
+                ResultSet rs = st.executeQuery(lastExp);
                 while (rs.next()) {
-                    count = rs.getInt("COUNT(nagiisys.systems)");
+                    sys = rs.getString("systems");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            Склонение числа систем
-            String str = count + (new Helper().plurality(count) == 1 ? "** системе." : "** системах.");
 //            Текст сообщения в чат
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setDescription("Фракция **Nagii Union** присутствует в **" + str);
+            embed.setDescription("Последняя экспансия фракции **Nagii Union** была в систему: **" + sys + "**");
             embed.setColor(0xf56111);
 //            Отправка сообщения
             event.getChannel().sendTyping().queue();

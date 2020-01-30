@@ -13,8 +13,9 @@ public class Help extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] command = event.getMessage().getContentRaw().split(" ");
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "help") ||
-                command[0].equalsIgnoreCase(Info.PREFIX + "info")) {
+        if (command[0].equalsIgnoreCase(Info.PREFIX + "help")
+                || command[0].equalsIgnoreCase(Info.PREFIX + "inf")
+                || command[0].equalsIgnoreCase(Info.PREFIX + "info")) {
 //            Текст сообщения в чат. Help
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Приветствую Вас,\n" +
@@ -23,6 +24,7 @@ public class Help extends ListenerAdapter {
                     "```\n" +
                     "!coriolis - Elite: Dangerous Shipyard\n" +
                     "!eddb - Elite: Dangerous Database\n" +
+                    "!lastexp - Последняя экспансия фракции Nagii Union\n" +
                     "!expdate [название системы] - Дата проведения экспансии в систему\n" +
                     "!syscount - Колличество систем, в которых присутствует Nagii Union\n" +
                     "!forum - форум ICU\n" +
