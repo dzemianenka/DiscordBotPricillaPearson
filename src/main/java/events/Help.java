@@ -24,6 +24,7 @@ public class Help extends ListenerAdapter {
                     "!coriolis - Elite: Dangerous Shipyard\n" +
                     "!eddb - Elite: Dangerous Database\n" +
                     "!expdate [название системы] - Дата проведения экспансии в систему\n" +
+                    "!syscount - Колличество систем, в которых присутствует Nagii Union\n" +
                     "!forum - форум ICU\n" +
                     "!inara - Elite: Dangerous companion\n" +
                     "!online - информация о активности discord канала\n" +

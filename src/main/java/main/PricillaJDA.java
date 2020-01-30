@@ -11,7 +11,7 @@ import javax.security.auth.login.LoginException;
 
 public class PricillaJDA {
     public static JDA jda;
-    //    Токен бота из https://discordapp.com/developers/applications/
+//    Токен бота из https://discordapp.com/developers/applications/
     private static final String TOKEN = "NjY5OTI0MDc5MzM1Mzc0ODk4.Xisonw.hQRtsXEiWgoYSlaPBa7pfehv2GI";
 
     public static void main(String[] args) throws LoginException {
@@ -22,6 +22,7 @@ public class PricillaJDA {
         jda.addEventListener(new Online());
         jda.addEventListener(new Help());
         jda.addEventListener(new ExpDate());
+        jda.addEventListener(new SysCount());
 
 
     }

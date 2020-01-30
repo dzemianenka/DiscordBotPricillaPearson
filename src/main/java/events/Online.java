@@ -1,5 +1,6 @@
 package events;
 
+import main.Helper;
 import main.Info;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -28,7 +29,7 @@ public class Online extends ListenerAdapter {
             sb.append(online);
             int members = event.getGuild().getMembers().size();
 //            Склонение online пользователей
-            switch (plurality(online)) {
+            switch (new Helper().plurality(online)) {
                 default:
                     sb.append(" online пользователей. Всего на канале ").append(members);
                     break;
@@ -40,12 +41,12 @@ public class Online extends ListenerAdapter {
                     break;
             }
 //            Склонение общего числа пользователей
-            switch (plurality(members)) {
+            switch (new Helper().plurality(members)) {
                 default:
                     sb.append(" пользователей.");
                     break;
                 case 1:
-                    sb.append(" пользователь");
+                    sb.append(" пользователь.");
                     break;
                 case 2:
                     sb.append(" пользователя.");
@@ -61,15 +62,5 @@ public class Online extends ListenerAdapter {
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
         }
-    }
-
-    //    Склонение сущиствительных с числительными
-    private static int plurality(int n) {
-        n = n % 100;
-        if (n == 0 || n > 10 && n < 20) return 0;
-        int n1 = n % 10;
-        if (n1 == 1) return 1;
-        if (n1 > 1 && n1 < 5) return 2;
-        return 0;
     }
 }
