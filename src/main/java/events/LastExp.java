@@ -1,7 +1,7 @@
 package events;
 
-import main.Helper;
-import main.Info;
+import main.DBCon;
+import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -16,15 +16,26 @@ public class LastExp extends ListenerAdapter {
         String[] command = event.getMessage().getContentRaw().split(" ");
         String sys = "";
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "lastexp")) {
-//            Строка запроса в БД
-            String lastExp = "SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1";
+        if (command[0].equalsIgnoreCase(Prefix.PREFIX + "lastexp")) {
             try {
-                Connection con = new Helper().getConnectionBD();
+                Connection con = new DBCon().getConnectionBD();
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery(lastExp);
+                ResultSet rs = st.executeQuery("SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1");
                 while (rs.next()) {
                     sys = rs.getString("systems");
+                }
+//                Закрываем соединение с BD
+                try {
+                    rs.close();
+                    st.close();
+                    con.close();
+                } finally {
+                    if (st != null) {
+                        st.close();
+                    }
+                    if (con != null) {
+                        con.close();
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

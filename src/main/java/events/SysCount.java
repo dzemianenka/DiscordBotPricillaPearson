@@ -1,7 +1,8 @@
 package events;
 
+import main.DBCon;
 import main.Helper;
-import main.Info;
+import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -16,15 +17,26 @@ public class SysCount extends ListenerAdapter {
         String[] command = event.getMessage().getContentRaw().split(" ");
         int count = 0;
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "syscount")) {
-//            Строка запроса в БД
-            String syscount = "SELECT COUNT(nagiisys.systems) FROM nagiisys";
+        if (command[0].equalsIgnoreCase(Prefix.PREFIX + "syscount")) {
             try {
-                Connection con = new Helper().getConnectionBD();
+                Connection con = new DBCon().getConnectionBD();
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery(syscount);
+                ResultSet rs = st.executeQuery("SELECT COUNT(nagiisys.systems) FROM nagiisys");
                 while (rs.next()) {
                     count = rs.getInt("COUNT(nagiisys.systems)");
+                }
+//                Закрываем соединение с BD
+                try {
+                    rs.close();
+                    st.close();
+                    con.close();
+                } finally {
+                    if (st != null) {
+                        st.close();
+                    }
+                    if (con != null) {
+                        con.close();
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

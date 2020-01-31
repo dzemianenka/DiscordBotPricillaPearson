@@ -1,6 +1,6 @@
 package events;
 
-import main.Info;
+import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -13,7 +13,7 @@ public class Links extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] command = event.getMessage().getContentRaw().split(" ");
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "forum")) {
+        if (command[0].equalsIgnoreCase(Prefix.PREFIX + "forum")) {
 //            Текст сообщения в чат. Форум
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Наш форум находится по адресу:");
@@ -23,7 +23,7 @@ public class Links extends ListenerAdapter {
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
-        } else if (command[0].equalsIgnoreCase(Info.PREFIX + "coriolis")) {
+        } else if (command[0].equalsIgnoreCase(Prefix.PREFIX + "coriolis")) {
 //            Текст сообщения в чат. Coriolis
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Elite: Dangerous Shipyard:");
@@ -33,7 +33,7 @@ public class Links extends ListenerAdapter {
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
-        } else if (command[0].equalsIgnoreCase(Info.PREFIX + "eddb")) {
+        } else if (command[0].equalsIgnoreCase(Prefix.PREFIX + "eddb")) {
 //            Текст сообщения в чат. EDDB
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Elite: Dangerous Database - EDDB:");
@@ -43,7 +43,7 @@ public class Links extends ListenerAdapter {
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
-        } else if (command[0].equalsIgnoreCase(Info.PREFIX + "inara")) {
+        } else if (command[0].equalsIgnoreCase(Prefix.PREFIX + "inara")) {
 //            Текст сообщения в чат. Inara
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("INARA - Elite: Dangerous companion:");

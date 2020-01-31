@@ -1,7 +1,6 @@
 package main;
 
-public class Info {
+public class Prefix {
 //    Используем префикс перед каждой командой
     public static String PREFIX = "!";
-
 }

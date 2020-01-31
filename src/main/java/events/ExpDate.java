@@ -1,7 +1,7 @@
 package events;
 
-import main.Helper;
-import main.Info;
+import main.DBCon;
+import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,11 +21,11 @@ public class ExpDate extends ListenerAdapter {
 
         if (command.length <= 1) {
 //            Пустая команда у нас не пройдет
-            if (command[0].equalsIgnoreCase(Info.PREFIX + "expdate")) {
+            if (command[0].equalsIgnoreCase(Prefix.PREFIX + "expdate")) {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("Введите название системы").queue();
             }
-        } else if (command[0].equalsIgnoreCase(Info.PREFIX + "expdate")) {
+        } else if (command[0].equalsIgnoreCase(Prefix.PREFIX + "expdate")) {
 //            Создадим строку из параметров запроса
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i < command.length; i++) sb.append(command[i]).append(" ");
@@ -35,12 +35,10 @@ public class ExpDate extends ListenerAdapter {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("Nagii - домашняя система фракции").queue();
             } else {
-//            Строка запроса в БД
-                String expDate = "SELECT * FROM nagiisys WHERE systems like '%" + sys + "%';";
                 try {
-                    Connection con = new Helper().getConnectionBD();
+                    Connection con = new DBCon().getConnectionBD();
                     Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery(expDate);
+                    ResultSet rs = st.executeQuery("SELECT * FROM nagiisys WHERE systems like '%" + sys + "%';");
                     while (rs.next()) {
                         String dateStr = rs.getString("date");
                         LocalDate dateSQL = LocalDate.parse(dateStr);
@@ -51,6 +49,19 @@ public class ExpDate extends ListenerAdapter {
                         long daysToNow = LocalDate.now().toEpochDay();
 //                        Дней со дня экспансии прошло:
                         days = (daysToNow - daysToExp);
+                    }
+//                    Закрываем соединение с BD
+                    try {
+                        rs.close();
+                        st.close();
+                        con.close();
+                    } finally {
+                        if (st != null) {
+                            st.close();
+                        }
+                        if (con != null) {
+                            con.close();
+                        }
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

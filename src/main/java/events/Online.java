@@ -1,7 +1,7 @@
 package events;
 
 import main.Helper;
-import main.Info;
+import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -15,7 +15,7 @@ public class Online extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] command = event.getMessage().getContentRaw().split(" ");
 
-        if (command[0].equalsIgnoreCase(Info.PREFIX + "online")) {
+        if (command[0].equalsIgnoreCase(Prefix.PREFIX + "online")) {
             int online = 0;
 //            Цикл для подсчета online-участников
             for (int i = 0; i < event.getGuild().getMembers().size(); i++) {

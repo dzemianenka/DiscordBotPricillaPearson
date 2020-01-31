@@ -17,7 +17,7 @@ public class PricillaJDA {
         jda.getPresence().setActivity(Activity.playing("Elite Dangerous"));
         jda.addEventListener(new Links());
         jda.addEventListener(new Online());
-        jda.addEventListener(new Help());
+        jda.addEventListener(new Info());
         jda.addEventListener(new ExpDate());
         jda.addEventListener(new SysCount());
         jda.addEventListener(new LastExp());
