@@ -19,23 +19,23 @@ public class SysCount extends ListenerAdapter {
 
         if (command[0].equalsIgnoreCase(Prefix.PREFIX + "syscount")) {
             try {
-                Connection con = new DBCon().getConnectionBD();
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT COUNT(nagiisys.systems) FROM nagiisys");
-                while (rs.next()) {
-                    count = rs.getInt("COUNT(nagiisys.systems)");
+                Connection connection = new DBCon().getConnectionBD();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT COUNT(nagiisys.systems) FROM nagiisys");
+                while (resultSet.next()) {
+                    count = resultSet.getInt("COUNT(nagiisys.systems)");
                 }
 //                Закрываем соединение с BD
                 try {
-                    rs.close();
-                    st.close();
-                    con.close();
+                    resultSet.close();
+                    statement.close();
+                    connection.close();
                 } finally {
-                    if (st != null) {
-                        st.close();
+                    if (statement != null) {
+                        statement.close();
                     }
-                    if (con != null) {
-                        con.close();
+                    if (connection != null) {
+                        connection.close();
                     }
                 }
             } catch (SQLException e) {

@@ -36,11 +36,11 @@ public class ExpDate extends ListenerAdapter {
                 event.getChannel().sendMessage("Nagii - домашняя система фракции").queue();
             } else {
                 try {
-                    Connection con = new DBCon().getConnectionBD();
-                    Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery("SELECT * FROM nagiisys WHERE systems like '%" + sys + "%';");
-                    while (rs.next()) {
-                        String dateStr = rs.getString("date");
+                    Connection connection = new DBCon().getConnectionBD();
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM nagiisys WHERE systems like '%" + sys + "%';");
+                    while (resultSet.next()) {
+                        String dateStr = resultSet.getString("date");
                         LocalDate dateSQL = LocalDate.parse(dateStr);
                         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 //                        Отформатированная дата
@@ -52,15 +52,15 @@ public class ExpDate extends ListenerAdapter {
                     }
 //                    Закрываем соединение с BD
                     try {
-                        rs.close();
-                        st.close();
-                        con.close();
+                        resultSet.close();
+                        statement.close();
+                        connection.close();
                     } finally {
-                        if (st != null) {
-                            st.close();
+                        if (statement != null) {
+                            statement.close();
                         }
-                        if (con != null) {
-                            con.close();
+                        if (connection != null) {
+                            connection.close();
                         }
                     }
                 } catch (SQLException e) {
