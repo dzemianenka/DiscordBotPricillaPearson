@@ -17,25 +17,12 @@ public class LastExp extends ListenerAdapter {
         String sys = "";
 
         if (command[0].equalsIgnoreCase(Prefix.PREFIX + "lastexp")) {
-            try {
-                Connection connection = new DBCon().getConnectionBD();
-                Statement statement = connection.createStatement();
+//            try-with-resources
+            try (Connection connection = new DBCon().getConnectionBD();
+                 Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery("SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1");
                 while (resultSet.next()) {
                     sys = resultSet.getString("systems");
-                }
-//                Закрываем соединение с BD
-                try {
-                    resultSet.close();
-                    statement.close();
-                    connection.close();
-                } finally {
-                    if (statement != null) {
-                        statement.close();
-                    }
-                    if (connection != null) {
-                        connection.close();
-                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

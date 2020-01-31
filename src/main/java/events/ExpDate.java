@@ -35,9 +35,9 @@ public class ExpDate extends ListenerAdapter {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("Nagii - домашняя система фракции").queue();
             } else {
-                try {
-                    Connection connection = new DBCon().getConnectionBD();
-                    Statement statement = connection.createStatement();
+//                try-with-resources
+                try (Connection connection = new DBCon().getConnectionBD();
+                     Statement statement = connection.createStatement()) {
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM nagiisys WHERE systems like '%" + sys + "%';");
                     while (resultSet.next()) {
                         String dateStr = resultSet.getString("date");
@@ -49,19 +49,6 @@ public class ExpDate extends ListenerAdapter {
                         long daysToNow = LocalDate.now().toEpochDay();
 //                        Дней со дня экспансии прошло:
                         days = (daysToNow - daysToExp);
-                    }
-//                    Закрываем соединение с BD
-                    try {
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-                    } finally {
-                        if (statement != null) {
-                            statement.close();
-                        }
-                        if (connection != null) {
-                            connection.close();
-                        }
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
