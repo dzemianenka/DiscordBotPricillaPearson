@@ -20,7 +20,8 @@ public class LastExp extends ListenerAdapter {
 //            try-with-resources
             try (Connection connection = new DBCon().getConnectionBD();
                  Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery("SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1");
+                ResultSet resultSet = statement.executeQuery(
+                        "SELECT systems FROM nagiisys ORDER BY sys_id DESC LIMIT 1");
                 while (resultSet.next()) {
                     sys = resultSet.getString("systems");
                 }

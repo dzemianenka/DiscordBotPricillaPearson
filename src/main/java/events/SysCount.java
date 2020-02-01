@@ -21,7 +21,8 @@ public class SysCount extends ListenerAdapter {
 //            try-with-resources
             try (Connection connection = new DBCon().getConnectionBD();
                  Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery("SELECT COUNT(nagiisys.systems) FROM nagiisys");
+                ResultSet resultSet = statement.executeQuery(
+                        "SELECT COUNT(nagiisys.systems) FROM nagiisys");
                 while (resultSet.next()) {
                     count = resultSet.getInt("COUNT(nagiisys.systems)");
                 }
