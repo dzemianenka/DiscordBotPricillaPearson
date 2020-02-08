@@ -28,11 +28,11 @@ public class LastExp extends ListenerAdapter {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            Текст сообщения в чат
+//            text
             EmbedBuilder embed = new EmbedBuilder();
             embed.setDescription("Последняя экспансия фракции **Nagii Union** была в систему: **" + sys + "**");
             embed.setColor(0xf56111);
-//            Отправка сообщения
+//            send text to chat
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();

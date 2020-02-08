@@ -8,8 +8,8 @@ import javax.security.auth.login.LoginException;
 
 public class PricillaJDA {
     public static JDA jda;
-//    Токен бота из https://discordapp.com/developers/applications/
-    private static final String TOKEN = "NjY5OTI0MDc5MzM1Mzc0ODk4.Xisonw.hQRtsXEiWgoYSlaPBa7pfehv2GI";
+//    Token from https://discordapp.com/developers/applications/
+    private static final String TOKEN = "NjY5OTI0MDc5MzM1Mzc0ODk4.XjVipg.zi56ICrq097kLjRadM0NAi4NN34";
 
     public static void main(String[] args) throws LoginException {
         jda = new JDABuilder(AccountType.BOT).setToken(TOKEN).build();

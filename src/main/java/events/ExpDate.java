@@ -20,17 +20,17 @@ public class ExpDate extends ListenerAdapter {
         long days = 0;
 
         if (command.length <= 1) {
-//            Пустая команда у нас не пройдет
+//            if command options is empty
             if (command[0].equalsIgnoreCase(Prefix.PREFIX + "expdate")) {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("Введите название системы").queue();
             }
         } else if (command[0].equalsIgnoreCase(Prefix.PREFIX + "expdate")) {
-//            Создадим строку из параметров запроса
+//            string from command options
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i < command.length; i++) sb.append(command[i]).append(" ");
             String sys = sb.toString().trim();
-//            Экспансия нашей фракции в систему Nagii невозможна
+//            expansion into 'Nagii' system is not possible
             if (sys.equalsIgnoreCase("nagii")) {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("Nagii - домашняя система фракции").queue();
@@ -44,28 +44,28 @@ public class ExpDate extends ListenerAdapter {
                         String dateStr = resultSet.getString("date");
                         LocalDate dateSQL = LocalDate.parse(dateStr);
                         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd MMMM yyyy");
-//                        Отформатированная дата
+//                        formatted date
                         date = dateSQL.format(f);
                         long daysToExp = dateSQL.toEpochDay();
                         long daysToNow = LocalDate.now().toEpochDay();
-//                        Дней со дня экспансии прошло:
+//                        days have passed since the expansion
                         days = (daysToNow - daysToExp);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-//                Если дата не получена
+//                if the date is not received
                 if (date.equals("Неизвестно")) {
                     event.getChannel().sendTyping().queue();
                     event.getChannel().sendMessage("Проверьте название системы").queue();
                 } else {
-//                    Текст сообщения в чат
+//                    text
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setTitle("Экспансия в систему **" + sys.toUpperCase() + "**");
                     embed.setDescription("Была проведена " + date + "\n" +
                             "Дней со дня экспансии прошло: " + days);
                     embed.setColor(0xf56111);
-//                    Отправка сообщения
+//                    send text to chat
                     event.getChannel().sendTyping().queue();
                     event.getChannel().sendMessage(embed.build()).queue();
                     embed.clear();

@@ -17,18 +17,18 @@ public class Online extends ListenerAdapter {
 
         if (command[0].equalsIgnoreCase(Prefix.PREFIX + "online")) {
             int online = 0;
-//            Цикл для подсчета online-участников
+//            cycle for counting online users
             for (int i = 0; i < event.getGuild().getMembers().size(); i++) {
                 if (event.getGuild().getMembers().get(i).getOnlineStatus().equals(OnlineStatus.ONLINE)
                         || event.getGuild().getMembers().get(i).getOnlineStatus().equals(OnlineStatus.DO_NOT_DISTURB)) {
                     online++;
                 }
             }
-//            Создание строки сообщения
+//            create text string
             StringBuilder sb = new StringBuilder("Здесь ");
             sb.append(online);
             int members = event.getGuild().getMembers().size();
-//            Склонение online пользователей
+//            decline of online users
             switch (new Helper().plurality(online)) {
                 default:
                     sb.append(" online пользователей. Всего на канале ").append(members);
@@ -40,7 +40,7 @@ public class Online extends ListenerAdapter {
                     sb.append(" online пользователя. Всего на канале ").append(members);
                     break;
             }
-//            Склонение общего числа пользователей
+//            decline in the total number of users
             switch (new Helper().plurality(members)) {
                 default:
                     sb.append(" пользователей.");
@@ -52,12 +52,12 @@ public class Online extends ListenerAdapter {
                     sb.append(" пользователя.");
                     break;
             }
-//            Текст сообщения в чат. Online
+//            text. Online
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Информация участников Discord канала:");
             embed.setDescription(sb.toString());
             embed.setColor(0xf56111);
-//            Отправка сообщения
+//            send text to chat
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();

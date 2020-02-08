@@ -16,7 +16,7 @@ public class Info extends ListenerAdapter {
         if (command[0].equalsIgnoreCase(Prefix.PREFIX + "help")
                 || command[0].equalsIgnoreCase(Prefix.PREFIX + "inf")
                 || command[0].equalsIgnoreCase(Prefix.PREFIX + "info")) {
-//            Текст сообщения в чат. Help
+//            text. Help
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Приветствую Вас,\n" +
                     " Я - спикер фракции Nagii Union");
@@ -32,7 +32,7 @@ public class Info extends ListenerAdapter {
                     "!online - информация о активности discord канала\n" +
                     "```");
             embed.setColor(0xf56111);
-//            Отправка сообщения
+//            send text to chat
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();

@@ -29,13 +29,13 @@ public class SysCount extends ListenerAdapter {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            Склонение числа систем
+//            declension of the number of systems
             String str = count + (new Helper().plurality(count) == 1 ? "** системе." : "** системах.");
-//            Текст сообщения в чат
+//            text
             EmbedBuilder embed = new EmbedBuilder();
             embed.setDescription("Фракция **Nagii Union** присутствует в **" + str);
             embed.setColor(0xf56111);
-//            Отправка сообщения
+//            send text to chat
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(embed.build()).queue();
             embed.clear();
