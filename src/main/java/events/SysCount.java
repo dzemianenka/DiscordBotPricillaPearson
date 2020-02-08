@@ -1,7 +1,6 @@
 package events;
 
 import main.DBCon;
-import main.Helper;
 import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -9,6 +8,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 import java.sql.*;
+
+import static main.Helper.plurality;
 
 public class SysCount extends ListenerAdapter {
 
@@ -30,7 +31,7 @@ public class SysCount extends ListenerAdapter {
                 e.printStackTrace();
             }
 //            declension of the number of systems
-            String str = count + (new Helper().plurality(count) == 1 ? "** системе." : "** системах.");
+            String str = count + (plurality(count) == 1 ? "** системе." : "** системах.");
 //            text
             EmbedBuilder embed = new EmbedBuilder();
             embed.setDescription("Фракция **Nagii Union** присутствует в **" + str);

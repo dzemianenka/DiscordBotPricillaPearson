@@ -1,6 +1,5 @@
 package events;
 
-import main.Helper;
 import main.Prefix;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -8,6 +7,8 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
+
+import static main.Helper.plurality;
 
 public class Online extends ListenerAdapter {
 
@@ -29,7 +30,7 @@ public class Online extends ListenerAdapter {
             sb.append(online);
             int members = event.getGuild().getMembers().size();
 //            decline of online users
-            switch (new Helper().plurality(online)) {
+            switch (plurality(online)) {
                 default:
                     sb.append(" online пользователей. Всего на канале ").append(members);
                     break;
@@ -41,7 +42,7 @@ public class Online extends ListenerAdapter {
                     break;
             }
 //            decline in the total number of users
-            switch (new Helper().plurality(members)) {
+            switch (plurality(members)) {
                 default:
                     sb.append(" пользователей.");
                     break;

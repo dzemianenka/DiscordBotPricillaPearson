@@ -2,7 +2,7 @@ package main;
 
 public class Helper {
 //    nouns with numbers
-    public int plurality(int n) {
+    public static int plurality(int n) {
         n = n % 100;
         if (n == 0 || n > 10 && n < 20) return 0;
         int n1 = n % 10;
