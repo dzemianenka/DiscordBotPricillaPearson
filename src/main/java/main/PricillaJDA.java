@@ -9,7 +9,7 @@ import javax.security.auth.login.LoginException;
 public class PricillaJDA {
     public static JDA jda;
 //    Token from https://discordapp.com/developers/applications/
-    private static final String TOKEN = "<Bot Token Removed>4";
+    private static final String TOKEN = "<Bad Token Removed>";
 
     public static void main(String[] args) throws LoginException {
         jda = new JDABuilder(AccountType.BOT).setToken(TOKEN).build();

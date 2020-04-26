@@ -39,7 +39,7 @@ public class ExpDate extends ListenerAdapter {
                 try (Connection connection = new DBCon().getConnectionBD();
                      Statement statement = connection.createStatement()) {
                     ResultSet resultSet = statement.executeQuery(
-                            "SELECT * FROM nagiisys WHERE systems LIKE '%" + sys + "%'");
+                            "SELECT * FROM nagiisys WHERE sys LIKE '%" + sys + "%'");
                     while (resultSet.next()) {
                         String dateStr = resultSet.getString("date");
                         LocalDate dateSQL = LocalDate.parse(dateStr);
