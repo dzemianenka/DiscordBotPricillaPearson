@@ -12,7 +12,7 @@ public class DBCon {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/nagii_union?useUnicode=true&serverTimezone=UTC",
                     "root",
-                    "12352");
+                    "root");
         } catch (SQLException e) {
             e.printStackTrace();
         }
